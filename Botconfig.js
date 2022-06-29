@@ -1,5 +1,5 @@
 config = {
-    token: 'OTkxNjgyNjMyNDAyMzQ2MDc0.GgqEnm.K9ZgOMSYZVXSpdhg8WOkZFJvEsAK8aZ2hq1XBQ',
+    token: '',
     prefix: "?",
     
     memberRole: "991654233210359808",
