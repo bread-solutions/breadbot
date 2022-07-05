@@ -12,6 +12,7 @@ exports.run = async (client, message, args, con) => {
     if(!member) return message.channel.send({content: `You must mention a user or provide a user ID!`});
             //message.channel.send({ content: `**${member} has been unmuted**` });
              con.query('SELECT * FROM mutedata WHERE `discordid` = ?', [member.id], async (err, rows) => {
+                if (!rows.lengh > 0) return message.channel.send({ content: `**${member} is not muted!**` });
                 var  parsed_data = JSON.parse(rows[0].prevroles);
                 parsed_data.forEach(async r => {
                     member.roles.add(r);

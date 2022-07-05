@@ -1,4 +1,4 @@
-const { Client, Collection } = require('discord.js');
+const { Client, Collection, MessageEmbed } = require('discord.js');
 const fs = require('fs');
 const { get } = require('http');
 const { join } = require('path');
@@ -85,7 +85,7 @@ async function checkAllMutes() {
             for (let user of getMutedUsers) {
                 const member = await guild.members.fetch(user);
                 if (!member) continue;
-                 con.query(`SELECT * FROM mutedata WHERE discordId = ?`, [user], (err, rows) => {
+                 con.query(`SELECT * FROM mutedata WHERE discordId = ?`, [user], async (err, rows) => {
                     if (err) throw err;
                     if (rows.length > 0) {
                         if (rows[0].muteTime === null) {
@@ -100,7 +100,7 @@ async function checkAllMutes() {
                             });
                             con.query(`DELETE FROM mutedata WHERE discordId = ?`, [user], (err, rows) => {
                                 if (err) throw err;
-                            })
+                            });
                         }
                     }
                  });

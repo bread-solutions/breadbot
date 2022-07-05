@@ -8,14 +8,6 @@ module.exports = async (client, con, message) => {
     const dataCh = await client.channels.fetch(config.logging.datalog)
     if (!dataCh) return console.log("Data channel not found");
 
-    const prefix = config.prefix;
-    const messageArray = message.content.split(" ");
-    const command = messageArray[0];
-    const args = messageArray.slice(1);
-
-    const commandFile = client.commands.get(command.slice(prefix.length));
-    if (commandFile) commandFile.run(client, message, args, con);
-
     let levels = Math.floor(Math.random() * 6) + 5;
     if (message.attachments.size > 0) {
         levels = levels += 1
@@ -66,4 +58,13 @@ module.exports = async (client, con, message) => {
             message.channel.send({ content: `:warning:  __***Sticky Message, Read Before Posting***__ :warning:\n\n${row[0].messageTxT}` });
         };
     });
+
+    const prefix = config.prefix;
+    if (!message.content.startsWith(prefix)) return;
+    const messageArray = message.content.split(" ");
+    const command = messageArray[0];
+    const args = messageArray.slice(1);
+
+    const commandFile = client.commands.get(command.slice(prefix.length));
+    if (commandFile) commandFile.run(client, message, args, con);
 }
