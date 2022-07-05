@@ -103,7 +103,7 @@ async function checkAllMutes() {
                             });
                         }
                     }
-                 });
+                 }); 
             }
             //console.log(`Checking Mutes...`);
         } else {
