@@ -18,7 +18,6 @@ const client = new BreadClient({intents: ["GUILDS", "GUILD_MEMBERS", "GUILD_BANS
 
 global.__basedir = __dirname;
 
-
 try {
     const mysql = require("mysql");
     const information = {
