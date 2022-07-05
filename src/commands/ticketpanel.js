@@ -1,8 +1,8 @@
 const { MessageEmbed, MessageButton, MessageActionRow } = require('discord.js');
+const config = require('../../config.json');
 
-exports.run = async (client, message, args) => {
+exports.run = async (client, message, args, con) => {
     if(!message.member.permissions.has("ADMINISTRATIOR")) return;
-    message.delete();
 
     const button = new MessageActionRow()
     .addComponents(

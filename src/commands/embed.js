@@ -4,14 +4,18 @@ const config = require('../../config.json');
 
 
 exports.run = async (client, message, args, con) => {
+    message.delete();
+    const msg = args.join(" ");
+
     const embed = new MessageEmbed()
-    .setColor("GREEN")
-    .setDescription(`Latency: **${client.ws.ping}ms**`);
+    .setTitle("You've been muted!")
+    .setColor("#FAD69E")
+    .setDescription(msg);
     message.channel.send({embeds: [embed]});
 }
 
 exports.info = {
-    name: "ping",
+    name: "embed",
     description: "See if im alive!",
     aliases: []
 }

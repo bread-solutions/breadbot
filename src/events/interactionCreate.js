@@ -1,8 +1,7 @@
 const { MessageEmbed, MessageActionRow, MessageButton } = require("discord.js")
-const botConfig = require('../../Botconfig');
-const config = botConfig.config
+const config = require('../../config.json');
 
-module.exports = async (client, interaction) => {
+module.exports = async (client, con, interaction) => {
     if (!interaction.isButton())  return;
     if (interaction.customId == "verifyButton") {
         if (interaction.member.roles.cache.some(role => role.id === config.memberRole)) return console.log("Someone tried to verify twice lol!");
@@ -82,7 +81,7 @@ module.exports = async (client, interaction) => {
         interaction.channel.send({content: `Ticket closing in 5 seconds`});
         const channel = interaction.channel;
         const attactment = await transcript.createTranscript(channel);
-        const ticketlogsch = client.channels.cache.get(config.ticketlogs)
+        const ticketlogsch = await client.channels.fetch(config.ticketlogs)
         
         const embedLog = new MessageEmbed()
         .setColor("#FAD69E")
