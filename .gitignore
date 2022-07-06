@@ -1,4 +1,4 @@
-dist
 node_modules
+dist
 package-lock.json
-config.ts
+src/config.ts
