@@ -6,8 +6,6 @@ CREATE TABLE `users` (
     `kicks` INT,
     `mutes` INT,
     `bans` INT,
-    `joins` INT,
-    `messages` INT,
     `lvl` VARCHAR(255) NOT NULL,
     `xp` VARCHAR(255) NOT NULL,
      PRIMARY KEY (`id`) USING BTREE
