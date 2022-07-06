@@ -2,7 +2,7 @@ import { Client, Collection } from "discord.js";
 import config  from "./config"
 import path from "path";
 import { readdirSync } from "fs";
-import mysql from 'mysql2';
+import mysql from 'mysql';
 import { ICommand } from "./backend/interfaces/ICommand";
 import { IEvent } from "./backend/interfaces/IEvent";
 
@@ -12,7 +12,7 @@ class BreadClient extends Client {
     public events: Collection<string, IEvent> = new Collection();
 
 }
-const client = new BreadClient({intents:['GUILDS', 'GUILD_MESSAGES', 'GUILD_MEMBERS', 'GUILD_MESSAGE_REACTIONS'], partials: ["MESSAGE", 'USER'] });
+const client = new BreadClient({intents: ["GUILDS", "GUILD_MEMBERS", "GUILD_BANS", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS", "DIRECT_MESSAGES", "DIRECT_MESSAGE_REACTIONS"]});
 
 // Login to mysql
 const pool = mysql.createPool({
@@ -21,12 +21,16 @@ const pool = mysql.createPool({
     password: config.mysql.password,
     database: config.mysql.database,
     waitForConnections: true,
-}).promise();
+});
 
-pool.getConnection().then(connection => {
-    console.log("Connection to database established!");
-    connection.release();
-}).catch(err => console.log(`Couldn't connect to database: ${err}`));
+pool.getConnection((err: any, connection: any) => {
+    if (err) throw err;
+    console.log("Connected to MySQL");
+})
+
+pool.on('release', function (connection: any) {
+    console.log("Connection %d released", connection.threadId);
+});
 
 // Load commands
 const commands = readdirSync(path.join(__dirname, ".", "commands"));

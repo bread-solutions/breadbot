@@ -14,7 +14,7 @@
     "fs": "^0.0.1-security",
     "mime-db": "^1.52.0",
     "mime-types": "^2.1.35",
-    "mysql2": "^2.3.3",
+    "mysql": "^2.18.1",
     "node-fetch": "^2.6.7",
     "path": "^0.12.7",
     "tr46": "^0.0.3",
@@ -39,5 +39,8 @@
   "bugs": {
     "url": "https://github.com/bread-solutions/breadbot/issues"
   },
-  "homepage": "https://github.com/bread-solutions/breadbot#readme"
+  "homepage": "https://github.com/bread-solutions/breadbot#readme",
+  "devDependencies": {
+    "@types/mysql": "^2.15.21"
+  }
 }
