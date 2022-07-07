@@ -30,7 +30,7 @@ pool.getConnection((err: any, connection: any) => {
 })
 
 pool.on('release', function (connection: any) {
-    console.log("Connection %d released", connection.threadId);
+    //console.log("Connection %d released", connection.threadId);
 });
 
 // Load commands
