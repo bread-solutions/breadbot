@@ -1,4 +1,4 @@
-import { Client, Collection, Guild, Role } from "discord.js";
+import { Client, Collection, Guild, Intents, Role } from "discord.js";
 import config  from "./config"
 import path from "path";
 import { readdirSync } from "fs";
@@ -13,6 +13,8 @@ class BreadClient extends Client {
     public events: Collection<string, IEvent> = new Collection();
 
 }
+
+new Intents("8")
 const client = new BreadClient({intents: ["GUILDS", "GUILD_MEMBERS", "GUILD_BANS", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS", "DIRECT_MESSAGES", "DIRECT_MESSAGE_REACTIONS"]});
 
 // Login to mysql
