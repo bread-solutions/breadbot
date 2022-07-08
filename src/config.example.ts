@@ -4,6 +4,7 @@ const config: IConfig = {
     token: "TOKEN_HERE",
     prefix: ";",
     guild_id: "GUILD_ID_HERE",
+    debug: false,
 
     role_settings: {
         memberRole: "MEMBER_ROLE_HERE",
@@ -17,6 +18,7 @@ const config: IConfig = {
         ticket_logs: "LOG_CHANEL_HERE", 
         audit_logs: "LOG_CHANEL_HERE",
         member_count: "LOG_CHANEL_HERE",
+        welcome_channel: "LOG_CHANEL_HERE",
     },
 
     ticket_settings: {

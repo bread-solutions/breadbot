@@ -5,7 +5,6 @@ import { readdirSync } from "fs";
 import mysql from 'mysql';
 import { ICommand } from "./backend/interfaces/ICommand";
 import { IEvent } from "./backend/interfaces/IEvent";
-import { checkAllMutes } from "./utils/db";
 
 class BreadClient extends Client {
     [x: string]: any;
@@ -27,13 +26,18 @@ const pool = mysql.createPool({
 });
 
 pool.getConnection((err: any, connection: any) => {
-    if (err) throw err;
-    console.log("Connected to MySQL");
+    if (err) {
+        pool.end();
+        console.log('Error getting mysql_pool connection: ' + err);
+    }
+    console.log("Connected to the database")
 })
 
 pool.on('release', function (connection: any) {
-    //console.log("Connection %d released", connection.threadId);
-});
+    if (config.debug) {
+        console.log('Connection %d released', connection.threadId);
+    }
+}); 
 
 // Load commands
 const commands = readdirSync(path.join(__dirname, ".", "commands"));
@@ -56,3 +60,9 @@ readdirSync(eventPath).forEach(async (file) => {
 client.login(config.token)
 export default client;
 export { pool };
+
+process.on('unhandledRejection', (err) => {
+    if (err != "DiscordAPIError: Unkown Message") {
+        console.log(`Unhandled rejection: ${err}`);
+    };
+});

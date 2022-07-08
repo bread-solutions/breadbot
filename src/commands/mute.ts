@@ -28,9 +28,12 @@ export const command: ICommand = {
                 });
                 member?.roles.add(config.role_settings.mutedRole);
             } else {
-                message.channel.send({ content: `***<:yes_tick:992140251252391956> Successfully muted ${member} for ${mutetime}***`});
                 var duration = new Date();
                 if (mutetime.includes("m")) {
+                    if (mutetime < "5") {
+                        mutetime = "5m";
+                    }
+                message.channel.send({ content: `***<:yes_tick:992140251252391956> Successfully muted ${member} for ${mutetime}***`});
                     duration.setMinutes(duration.getMinutes() + parseInt(mutetime.replace("m", "")));
                 } else if (mutetime.includes("h")) {
                     duration.setHours(duration.getHours() + parseInt(mutetime.replace("h", "")));
