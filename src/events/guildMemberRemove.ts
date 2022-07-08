@@ -1,7 +1,6 @@
 import { TextChannel } from "discord.js";
 import { IEvent } from "../backend/interfaces/IEvent";
 import config from "../config";
-import { checkAllMutes } from "../utils/db";
 import { memberChannelCount } from "../utils/functions";
 
 export const event: IEvent = {

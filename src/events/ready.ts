@@ -6,7 +6,7 @@ export const event: IEvent = {
     name: 'ready',
     run: async(client, pool, ready) => {
         console.log("Online")
-        checkAllMutes();
+        setInterval(checkAllMutes, 1000 * 60 * 5);
         memberChannelCount();
     }
 }

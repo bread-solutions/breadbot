@@ -1,6 +1,6 @@
 {
-  "name": "breadbotts",
-  "version": "1.0.1",
+  "name": "breadbot",
+  "version": "1.0.5",
   "description": "Bot made for Bread Solutions",
   "main": "index.js",
   "dependencies": {

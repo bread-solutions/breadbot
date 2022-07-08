@@ -45,5 +45,5 @@ export async function checkAllMutes(): Promise<void> {
         }
     });
 
-    setInterval(checkAllMutes, 1000 * 60 * 5);
+    //setInterval(checkAllMutes, 1000 * 60 * 5);
 }
