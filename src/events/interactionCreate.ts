@@ -11,13 +11,9 @@ export const event: IEvent = {
 
         if (interaction.customId === "verifyButton") {
             if (interaction.member.roles.cache.some((role: { id: any; }) => role.id === config.role_settings.memberRole)) return;
-            interaction.member.roles.add(config.role_settings.memberRole).then(() => {
-                //interaction.reply({content: "You have been verified!", ephimeral: true});
-            });
+            interaction.member.roles.add(config.role_settings.memberRole);
         } else if (interaction.customId === "TicketOpen") {
-                interaction.guild.channels.create(`ticket-${interaction.user.username}`, {
-                    type: "GUILD_TEXT",
-                    permissionOverwrites: [{
+                    let permissionsArray = [{
                         id: interaction.member.id,
                         allow: ['VIEW_CHANNEL', 'SEND_MESSAGES'],
 
@@ -26,13 +22,24 @@ export const event: IEvent = {
                         id: interaction.guild.roles.everyone,
                         deny: ['VIEW_CHANNEL'],
                     },
-                    {
-                        id: interaction.guild.roles.cache.find((role: { id: any; }) => role.id === config.role_settings.supportRole),
-                        allow: ['VIEW_CHANNEL', 'SEND_MESSAGES'],
-                    }]
+                ]
+                config.role_settings.supportRole.forEach(role => {
+                    let yer = interaction.guild.roles.cache.get(role);
+                    if (!yer) {
+                        console.log(`${role} is not a role`);
+                    } else {
+                        let tempArray = {
+                            id: role,
+                            allow: ['VIEW_CHANNEL', 'SEND_MESSAGES'],
+                        }
+                        permissionsArray.push(tempArray);
+                    }
+                });
+                interaction.guild.channels.create(`ticket-${interaction.user.username}`, {
+                    type: "GUILD_TEXT",
                 }).then(async (channel) => {
-                    interaction.deferReply({ content: `Ticket opened by ${interaction.user.username}`, ephemeral: true });
                     channel.setParent(config.ticket_settings.category);
+                    channel.permissionOverwrites.set(permissionsArray);
                     const embed46 = new MessageEmbed()
                         .setColor("#FAD69E")
                         .setTitle(`Ticket opened by ${interaction.user.username}`)
