@@ -7,7 +7,8 @@ export const event: IEvent = {
     name: 'messageUpdate',
     run: async(client, con, message, newMessage) => {
         if (message.author.bot) return;
-        if(message.content.startsWith(config.prefix)) return;
+        if(message.content.startsWith(config.prefix) || message.content === newMessage.content) return;
+
 
         const logembed = new MessageEmbed()
             .setColor("#FAD69E")
