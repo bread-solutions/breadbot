@@ -13,10 +13,10 @@ export const event: IEvent = {
             `${member} just landed.`,
             `${member} just joined. Everyone, look busy!`,
             `${member} just showed up.`,
-            `${member} hopped into the server`,
+            `${member} hopped into the server.`,
             `${member} finally arrived.`,
             `${member} is here.`,
-            `${member} fuck you but`
+            `${member}, fuck you but`
         ];
 
         const channel = await client.channels.fetch(config.logging_channels.welcome_channel);
