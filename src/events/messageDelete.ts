@@ -12,7 +12,7 @@ export const event: IEvent = {
         const logembed = new MessageEmbed()
             .setColor("#FAD69E")
             .setTitle("Audit Log - Message Deleted")
-            .setDescription(`**${message.author.tag}** deleted a message in **${message.channel.name}**`)
+            .setDescription(`A message by **${message.author.tag}** was deleted in **${message.channel.name}**`)
             .addField("Message", message.content)
             .setTimestamp();
         const logchannel = client.channels.cache.get(config.logging_channels.audit_logs);
